@@ -18,3 +18,5 @@ venv
 
 tailwind.config.js
 .DS_Store
+
+IMG_*.jpeg
