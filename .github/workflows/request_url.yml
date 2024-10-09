@@ -1,0 +1,14 @@
+name: Request URL
+
+on:
+  schedule:
+    - cron: "*/12 * * * *"
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send HTTP request
+        run: |
+          curl -X GET "https://myspending.onrender.com"
