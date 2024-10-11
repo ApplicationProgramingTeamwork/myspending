@@ -25,4 +25,6 @@ def upload_photo(request):
         user_timezone = request.session.get('user_timezone', 'UTC')
         local_tz = pytz.timezone(user_timezone)
         data['date'] = parsed_datetime.astimezone(local_tz)
+    else:
+        data = None
     return render(request, 'ai/index.html', {'data': data, 'language': languages[0]})
