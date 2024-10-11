@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 import dj_database_url
 from decouple import config
 
@@ -26,10 +27,10 @@ SECRET_KEY = config(
     'SECRET_KEY', default='django-insecure-99_+4yj_7)po_3ua9lk0*20%i3z51gq34+3r34mf8nc69h+nc+')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = config('RENDER_EXTERNAL_HOSTNAME', default=None)
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
@@ -82,7 +83,6 @@ WSGI_APPLICATION = 'myspending.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        # TODO update this row to your proper connection string
         default='postgresql://postgres:postgres@localhost:5432/myspending',
         conn_max_age=600
     )
@@ -130,7 +130,7 @@ STATIC_URL = '/static/'
 # The Following code for production may break development mode, so we need to check if we're in DEBUG mode
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = BASE_DIR / 'staticfiles'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     # Turn on the WhiteNoise storage backend which compresses static files for smaller disk use,
     # and renames the files with unique names for each version of that file for long term caching
@@ -141,3 +141,5 @@ if not DEBUG:
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 0  # No limit on file size
