@@ -6,7 +6,7 @@ Here are the tasks we need to do.
 
 ### Models
 - [ ] Receipt: `storeName`, `storeAddress`, `totalPrice`, `date`
-- [ ] ReceiptProduct: `receipt`, `name`, `nameEnglish`, `nameChinese`, `price`, `discount`
+- [ ] Product: `receipt`, `name`, `nameEnglish`, `nameChinese`, `price`, `discount`
 
 ### views
 - [ ] Receipt List View: Display a list of all receipts with basic details like store name, date, and total price.
@@ -16,9 +16,9 @@ Here are the tasks we need to do.
 
 ### URLs
 - [ ] `/receipts/`: URL to view the list of receipts.
-- [ ] `/receipts/<id>/`: URL to view the details of a specific receipt.
+- [ ] `/receipts/<receipts_id>/`: URL to view the details of a specific receipt.
 - [ ] `/receipts/add/`: URL to add a new receipt.
-- [ ] `/receipts/<id>/edit/`: URL to edit an existing receipt.
+- [ ] `/receipts/<receipts_id>/product/<product_id>/edit`: URL to edit the details of a specific product in a receipt.
 
 ## Receipt example and its recognized data
 ![这是图片](/readme/example4.jpeg)
