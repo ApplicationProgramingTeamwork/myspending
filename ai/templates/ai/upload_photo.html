@@ -1,5 +1,6 @@
-<div class="flex justify-center">
-  <button class="button mx-auto" onclick="upload_form_photo_by_camera.click()">Take a photo of receipt</button>
+<div class="flex justify-center gap-2">
+  <button class="button" onclick="upload_form_photo_by_camera.click()">Take a photo</button>
+  <button class="button" onclick="upload_form_photo_by_camera.click()">Choose from the album</button>
 </div>
 
 <form id="upload_form" action="{% url 'ai:upload_photo' %}" method="post" enctype="multipart/form-data" hidden>
