@@ -41,15 +41,12 @@ chat_session = model.start_chat(
         {
             "role": "user",
             "parts": [
-                "你是一个购物小票识别程序，我会上传照片，你识别后返回给我JSON，完需要如下信息：超市名称，超市地址，商品名称，商品翻译成英文的名称，商品翻译成中文的名称，商品价格(数字格式,默认值为0)，商品折扣(数字格式,默认值为0)，小票总价(数字格式,默认值为0)，时间日期(iso格式时间日期字符串)。注意：不要把单价当成商品，如（1 KPL）；不要有任何换行。",
+                "你是一个超市小票识别程序，我会发给你一张照片让你识别，小票的格式一般如下：",
+                "```\nRosten Bao Bun höyrysampyla 4,78\n  ALENNUS 30% -1,39\nPizza vegetariana 4,78\n  Lidl Plus -saästösi -1,39\n```\n前面没有缩进的行是商品信息，紧随其后的是价格；前面有缩进的行是打折或者补充信息，紧随其后的数字一般是优惠价格",
+                "我需要生成这样的JSON结构，需要这些信息：超市名称，超市地址，商品名称，商品翻译成英文的名称，商品翻译成中文的名称，商品价格(数字格式,默认值为0)，商品折扣(数字格式,默认值为0)，小票总价(数字格式,默认值为0)，时间日期(iso格式时间日期字符串)。你直接返回我json",
+                "```json\n{\n  \"storeName\": \"Lidl\",\n  \"storeAddress\": \"Lidl Suomi Ky Turku-Keskusta Eerikinkatu 4\",\n  \"items\": [\n    {\n      \"name\": \"Rostin Bao Bun höyry­sämpy­lä\",\n      \"nameEnglish\": \"Steamed Bao Bun\",\n      \"nameChinese\": \"蒸笼包\",\n      \"price\": 2.39,\n      \"discount\": 0.29\n    },\n],\n  \"totalPrice\": 12.96,\n  \"date\": \"2024-09-28T17:02:00Z\"\n}\n```",
             ],
-        },
-        {
-            "role": "model",
-            "parts": [
-                "```json\n{\n  \"storeName\": \"LIDL\",\n  \"storeAddress\": \"Lidl Suomi Ky Turku-Keskusta Eerikinkatu 4\",\n  \"items\": [\n    {\n      \"name\": \"Rostin Bao Bun höyry­sämpy­lä\",\n      \"nameEnglish\": \"Steamed Bao Bun\",\n      \"nameChinese\": \"蒸笼包\",\n      \"price\": 2.39,\n      \"discount\": 0.29,\n    },\n    {\n      \"name\": \"Viini­ry­pä­le­tu­m­ma 500g\",\n      \"nameEnglish\": \"Dark Grapes 500g\",\n      \"nameChinese\": \"黑葡萄 500g\",\n      \"price\": 1.59\n    },\n    {\n      \"name\": \"Pohjolan Meijeri Täys­maito E\",\n      \"nameEnglish\": \"Full Milk E\",\n      \"nameChinese\": \"全脂牛奶\",\n      \"price\": 0.99\n    },\n    {\n      \"name\": \"Vit­a­sia­g­yo­za tai­ki­nan­yy­t. 1l\",\n      \"nameEnglish\": \"Gyoza Dough 1L\",\n      \"nameChinese\": \"饺子皮 1L\",\n      \"price\": 2.99\n    },\n    {\n      \"name\": \"Cosmo­po­li­tan salaatti 225g\",\n      \"nameEnglish\": \"Cosmopolitan Salad 225g\",\n      \"nameChinese\": \"大都会沙拉 225g\",\n      \"price\": 1.18\n    }\n  ],\n  \"totalPrice\": 8.32,\n  \"date\": \"2024-09-26T20:13:00Z\"\n}\n",
-            ],
-        },
+        }
     ]
 )
 

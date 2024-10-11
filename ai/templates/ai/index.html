@@ -1,0 +1,30 @@
+{% extends 'render/base.html' %}
+{% block content %}
+  {% if data %}
+    <h1 class="text-2xl font-bold">{{ data.storeName }}</h1>
+    <p>{{ data.storeAddress }}</p>
+    <p>{{ data.date }}</p>
+    <ul>
+      {% for item in data.items %}
+        <li>
+          <div class="font-bold">{{ item.name }}</div>
+          {% if 'zh' in language %}
+            <div>{{ item.nameChinese }}</div>
+          {% else %}
+            <div>{{ item.nameEnglish }}</div>
+          {% endif %}
+          {% if item.discount != 0 %}
+            <div class="text-right">
+              <span class="text-xs">DISCOUNT</span> € {{ item.discount|floatformat:2 }}
+            </div>
+          {% endif %}
+          {% if item.price != 0 %}
+            <div class="text-right font-bold">€ {{ item.price|floatformat:2 }}</div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="font-bold text-2xl text-right">€ {{ data.totalPrice|floatformat:2 }}</p>
+  {% endif %}
+  {% include 'ai/upload_photo.html' %}
+{% endblock %}
