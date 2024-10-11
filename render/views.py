@@ -1,5 +1,11 @@
+import json
 from django.shortcuts import render
 
-# Create your views here.
-def index(request):
-    return render(request, 'render/index.html', {})
+
+def home(request):
+    jsonString = request.GET.get('json', '')
+    if jsonString:
+        data = json.loads(jsonString)
+    else:
+        data = None
+    return render(request, 'render/home.html', {'data': data})

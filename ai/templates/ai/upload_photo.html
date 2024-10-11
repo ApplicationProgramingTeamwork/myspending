@@ -1,0 +1,11 @@
+<div class="flex justify-center">
+  <button class="button mx-auto" onclick="upload_form_photo_by_camera.click()">Take a photo of receipt</button>
+</div>
+
+<form id="upload_form" action="{% url 'ai:upload_photo' %}" method="post" enctype="multipart/form-data" hidden>
+  {% csrf_token %}
+  <div>
+    <input id="upload_form_photo_by_camera" type="file" name="photo" accept="image/*" capture="camera" onchange="upload_form.submit()" />
+    <input id="upload_form_photo_by_album" type="file" name="photo" accept="image/*" onchange="upload_form.submit()" />
+  </div>
+</form>

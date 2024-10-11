@@ -3,8 +3,6 @@ Install the Google AI Python SDK
 
 $ pip install google-generativeai
 """
-import json
-import os
 import google.generativeai as genai
 from decouple import config
 
@@ -38,14 +36,12 @@ model = genai.GenerativeModel(
     # See https://ai.google.dev/gemini-api/docs/safety-settings
 )
 
-current_directory = os.path.dirname(os.path.abspath(__file__))
-
 chat_session = model.start_chat(
     history=[
         {
             "role": "user",
             "parts": [
-                "你是一个购物小票识别程序，我会上传照片，你识别后返回给我JSON，完需要如下信息：超市名称，超市地址，商品名称，商品翻译成英文的名称，商品翻译成中文的名称，商品价格，商品折扣，小票总价，时间日期",
+                "你是一个购物小票识别程序，我会上传照片，你识别后返回给我JSON，完需要如下信息：超市名称，超市地址，商品名称，商品翻译成英文的名称，商品翻译成中文的名称，商品价格(数字格式,默认值为0)，商品折扣(数字格式,默认值为0)，小票总价(数字格式,默认值为0)，时间日期(iso格式时间日期字符串)。",
             ],
         },
         {
@@ -57,11 +53,11 @@ chat_session = model.start_chat(
     ]
 )
 
-response = chat_session.send_message(upload_to_gemini(os.path.join(current_directory,
-                                                                   "../readme/example4.jpeg"), mime_type="image/jpeg"),)
 
-print(response.text)
+def send_message_to_gemini(message):
+    response = chat_session.send_message(message)
+    return response.text
 
-python_dict = json.loads(response.text)
 
-print(python_dict)
+def send_photo_to_gemini(photo):
+    return send_message_to_gemini(upload_to_gemini(photo))
