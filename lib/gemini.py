@@ -1,4 +1,3 @@
-
 """
 Install the Google AI Python SDK
 
@@ -7,10 +6,10 @@ $ pip install google-generativeai
 import json
 import os
 import google.generativeai as genai
+from decouple import config
 
-
-# genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-genai.configure(api_key='AIzaSyA68-rLqTZsvq9bVvUlZIWyyOj5w02EaMc')
+# Use config to get the API key
+genai.configure(api_key=config("GEMINI_API_KEY"))
 
 
 def upload_to_gemini(path, mime_type=None):
