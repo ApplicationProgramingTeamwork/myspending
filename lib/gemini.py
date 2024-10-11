@@ -59,7 +59,7 @@ chat_session = model.start_chat(
 )
 
 response = chat_session.send_message(upload_to_gemini(os.path.join(current_directory,
-                                                                   "IMG_3851.jpeg"), mime_type="image/jpeg"),)
+                                                                   "../readme/example4.jpeg"), mime_type="image/jpeg"),)
 
 print(response.text)
 
