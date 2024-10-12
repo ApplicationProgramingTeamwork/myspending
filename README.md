@@ -1,20 +1,29 @@
 # My Spending
-A web application designed to track supermarket expenses. It automatically captures product information by scanning supermarket receipts, helping you with expense tracking, analyzing your spending patterns, and offering additional features to manage your finances efficiently.
+A web application designed to track supermarket expenses. It automatically captures shopping details by taking a photo of the receipt, helping you monitor your spending, analyze your purchasing habits, and offering additional features to efficiently manage your finances.
 
 ## TODO
 Here are the tasks we need to do.
+
+### Feature
+- [x] AI: Upload the photo to the AI server and analyze the receipt’s contents.
+- [ ] Receipt List Page: View previously analyzed receipts.
+- [ ] Receipt Detail Page: Access details from the receipt list to see the shopping information captured from the receipt.
+- [ ] Receipt Edit Page: Edit the receipt’s content. Since the AI’s accuracy isn’t 100%, manual adjustments may be necessary.
+- [ ] Financial Analysis Page: Analyze data visually, such as monthly spending, preferred supermarkets, discount comparisons, and more.
 
 ### Models
 - [ ] Receipt: `storeName`, `storeAddress`, `totalPrice`, `date`
 - [ ] Product: `receipt`, `name`, `nameEnglish`, `nameChinese`, `price`, `discount`
 
 ### views
+- [x] Photo upload view: Upload a photo to the AI
 - [ ] Receipt List View: Display a list of all receipts with basic details like store name, date, and total price.
 - [ ] Receipt Detail View: Display detailed information of a selected receipt, including all products, their prices, and any discounts applied.
 - [ ] Add Receipt View: A form to add a new receipt manually, including fields for store name, store address, total price, and date.
 - [ ] Edit Receipt View: A form to edit an existing receipt's details.
 
 ### URLs
+- [x] `/ai/upload_photo`: Upload a photo to the AI.
 - [ ] `/receipts/`: URL to view the list of receipts.
 - [ ] `/receipts/<receipts_id>/`: URL to view the details of a specific receipt.
 - [ ] `/receipts/add/`: URL to add a new receipt.
