@@ -21,7 +21,7 @@ Here are the tasks we need to do.
 - [ ] `/receipts/<receipts_id>/product/<product_id>/edit`: URL to edit the details of a specific product in a receipt.
 
 ## Receipt example and its recognized data
-![这是图片](/readme/example4.jpeg)
+![example](/readme/example.jpeg)
 
 ```json
 {
