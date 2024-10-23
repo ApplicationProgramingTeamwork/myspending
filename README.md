@@ -1,32 +1,45 @@
 # My Spending
 A web application designed to track supermarket expenses. It automatically captures shopping details by taking a photo of the receipt, helping you monitor your spending, analyze your purchasing habits, and offering additional features to efficiently manage your finances.
 
+## Install
+You need to run the following command when you first install this project
+```shell
+pip install -r requirements.txt
+```
+
+Then, create a `.env` file in the root directory with the following content
+```shell
+# Apply Gemini API keys at https://ai.google.dev
+GEMINI_API_KEY="" 
+DATABASE_URL="postgresql://username:password@localhost:5432/myspending"
+```
+
 ## TODO
 Here are the tasks we need to do.
 
 ### Feature
 - [x] AI: Upload the photo to the AI server and analyze the receipt’s contents.
-- [ ] Receipt List Page: View previously analyzed receipts.
-- [ ] Receipt Detail Page: Access details from the receipt list to see the shopping information captured from the receipt.
-- [ ] Receipt Edit Page: Edit the receipt’s content. Since the AI’s accuracy isn’t 100%, manual adjustments may be necessary.
+- [x] Receipt List Page: View previously analyzed receipts.
+- [x] Receipt Detail Page: Access details from the receipt list to see the shopping information captured from the receipt.
+- [x] Receipt Edit Page: Edit the receipt’s content. Since the AI’s accuracy isn’t 100%, manual adjustments may be necessary.
 - [ ] Financial Analysis Page: Analyze data visually, such as monthly spending, preferred supermarkets, discount comparisons, and more.
 
 ### Models
-- [ ] Receipt: `storeName`, `storeAddress`, `totalPrice`, `date`
-- [ ] Product: `receipt`, `name`, `nameEnglish`, `nameChinese`, `price`, `discount`
+- [x] Receipt: `storeName`, `storeAddress`, `totalPrice`, `date`
+- [x] Product: `receipt`, `name`, `nameEnglish`, `nameChinese`, `price`, `discount`
 
 ### views
 - [x] Photo upload view: Upload a photo to the AI
-- [ ] Receipt List View: Display a list of all receipts with basic details like store name, date, and total price.
-- [ ] Receipt Detail View: Display detailed information of a selected receipt, including all products, their prices, and any discounts applied.
-- [ ] Add Receipt View: A form to add a new receipt manually, including fields for store name, store address, total price, and date.
+- [x] Receipt List View: Display a list of all receipts with basic details like store name, date, and total price.
+- [x] Receipt Detail View: Display detailed information of a selected receipt, including all products, their prices, and any discounts applied.
+- [x] Add Receipt View: A form to add a new receipt manually, including fields for store name, store address, total price, and date.
 - [ ] Edit Receipt View: A form to edit an existing receipt's details.
 
 ### URLs
 - [x] `/ai/upload_photo`: Upload a photo to the AI.
-- [ ] `/receipts/`: URL to view the list of receipts.
-- [ ] `/receipts/<receipts_id>/`: URL to view the details of a specific receipt.
-- [ ] `/receipts/add/`: URL to add a new receipt.
+- [x] `/receipts/`: URL to view the list of receipts.
+- [x] `/receipts/<receipts_id>/`: URL to view the details of a specific receipt.
+- [x] `/receipts/add/`: URL to add a new receipt.
 - [ ] `/receipts/<receipts_id>/product/<product_id>/edit`: URL to edit the details of a specific product in a receipt.
 
 ## Receipt example and its recognized data
