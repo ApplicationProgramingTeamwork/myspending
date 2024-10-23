@@ -39,6 +39,8 @@ if RENDER_EXTERNAL_HOSTNAME:
 INSTALLED_APPS = [
     'render',
     'ai',
+    'accounts',
+    'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,3 +145,6 @@ if not DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 0  # No limit on file size
+LOGIN_REDIRECT_URL = 'render:home'
+LOGOUT_REDIRECT_URL = 'render:home'
+LOGIN_URL = 'accounts:login'

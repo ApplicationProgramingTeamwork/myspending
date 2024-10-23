@@ -1,0 +1,9 @@
+{% extends "render/base.html" %}
+{% block content %}
+    <p>Add a new receipt:</p>
+    <form action="{% url 'render:new_receipt' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button type="submit" name="submit">Add receipt</button> 
+    </form>
+{% endblock content %}

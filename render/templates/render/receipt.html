@@ -1,0 +1,19 @@
+{% extends 'render/base.html' %}
+
+{% block page_header %}
+  <h1>Receipts</h1>
+{% endblock page_header %}
+
+{% block content %}
+  <ul class="list-group border-bottom pb-2 mb-4">
+    {% for receipt in receipts %}
+      <li class="list-group-item border-0">
+        {{ receipt.storeName }} - ${{ receipt.totalPrice }}
+      </li>
+    {% empty %}
+      <li class="list-group-item border-0">No receipts have been added yet.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'render:new_receipt' %}" class="btn btn-primary mt-2">Add a new receipt</a>
+{% endblock content %}
