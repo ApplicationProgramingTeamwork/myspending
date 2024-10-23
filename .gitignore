@@ -20,3 +20,4 @@ tailwind.config.js
 .DS_Store
 
 .env
+mp_env
