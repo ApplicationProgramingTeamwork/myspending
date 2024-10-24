@@ -1,30 +1,42 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse
 from ai.forms import PhotoUploadForm
 from ai.gemini import send_photo_to_gemini
-from dateutil import parser
-import pytz
+from django.contrib.auth.decorators import login_required
 import json
 
+from render.forms import ProductForm, ReceiptForm
 
+
+@login_required
 def upload_photo(request):
     if request.method == 'POST':
         form = PhotoUploadForm(request.POST, request.FILES)
         if form.is_valid():
             photo = form.cleaned_data['photo']
-            jsonString = send_photo_to_gemini(photo.temporary_file_path())
-            url = reverse('ai:upload_photo')
-            return HttpResponseRedirect(f'{url}?json={jsonString}')
+            json_string = send_photo_to_gemini(photo.temporary_file_path())
+            data = json.loads(json_string)
+            receipt_form = ReceiptForm(data)
+            if receipt_form.is_valid():
+                receipt = receipt_form.save(commit=False)
+                receipt.owner = request.user
+                receipt.save()
 
-    languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '').split(',')
-    jsonString = request.GET.get('json', '')
-    if jsonString:
-        data = json.loads(jsonString)
-        parsed_datetime = parser.isoparse(data['date'])
-        user_timezone = request.session.get('user_timezone', 'UTC')
-        local_tz = pytz.timezone(user_timezone)
-        data['date'] = parsed_datetime.astimezone(local_tz)
-    else:
-        data = None
-    return render(request, 'ai/index.html', {'data': data, 'language': languages[0]})
+                for item in data['items']:
+                    product_data = {
+                        'receipt': receipt,
+                        'name': item['name'],
+                        'nameEnglish': item['nameEnglish'],
+                        'nameChinese': item['nameChinese'],
+                        'price': item['price'],
+                        'discount': item['discount']
+                    }
+                    product_form = ProductForm(product_data)
+                    if product_form.is_valid():
+                        product_form.save()
+                    else:
+                        print(product_form.errors)
+            else:
+                print(receipt_form.errors)
+
+    return HttpResponseRedirect(reverse('render:receipts'))

@@ -1,16 +1,26 @@
-<div class="flex flex-col justify-center gap-2">
-  <button class="button" onclick="upload_form_photo_by_camera.click();">Take a photo of receipt</button>
-  <button class="button" onclick="upload_form_photo_by_album.click();">Choose from the album</button>
-</div>
-
-<div id="loading_overlay_layer" class="fixed left-0 top-0 w-screen h-screen bg-white hidden flex-col justify-center items-center gap-5">
-  <div class="-mt-10">
-    <svg class="animate-spin -ml-1 mr-3 w-16 h-16 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+<div class="fixed-bottom d-flex justify-content-center" style="height: 100px;gap: 10px;">
+  <a href="{% url 'render:new_product' %}">
+    <button class="btn btn-primary rounded-circle" style="height: 60px; width: 60px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+        <path d="M5 12h14" />
+        <path d="M12 5v14" />
+      </svg>
+    </button>
+  </a>
+  <button class="btn btn-primary rounded-circle" style="height: 60px; width: 60px;" onclick="upload_form_photo_by_camera.click();">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera">
+      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+      <circle cx="12" cy="13" r="3" />
     </svg>
-  </div>
-  <div class="font-thin text-xl">&nbsp;RECOGNIZING...</div>
+  </button>
+  <button class="btn btn-primary rounded-circle" style="height: 60px; width: 60px;" onclick="upload_form_photo_by_album.click();">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-images">
+      <path d="M18 22H4a2 2 0 0 1-2-2V6" />
+      <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />
+      <circle cx="12" cy="8" r="2" />
+      <rect width="16" height="16" x="6" y="2" rx="2" />
+    </svg>
+  </button>
 </div>
 
 <form id="upload_form" action="{% url 'ai:upload_photo' %}" method="post" enctype="multipart/form-data" hidden>

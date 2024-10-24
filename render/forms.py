@@ -1,20 +1,24 @@
 from django import forms
 from .models import Receipt, Product
 
+
 class ReceiptForm(forms.ModelForm):
     class Meta:
         model = Receipt
-        fields = ['storeName', 'storeAddress', 'totalPrice']
+        fields = ['storeName', 'storeAddress', 'totalPrice', 'date']
         labels = {
             'storeName': 'Store Name',
             'storeAddress': 'Store Address',
             'totalPrice': 'Total Price',
+            'date': 'Date'
         }
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['receipt', 'name', 'nameEnglish', 'nameChinese', 'price', 'discount']
+        fields = ['receipt', 'name', 'nameEnglish',
+                  'nameChinese', 'price', 'discount']
         labels = {
             'receipt': 'Receipt',
             'name': 'Product Name',
