@@ -1,6 +1,9 @@
 {% extends 'render/base.html' %}
-
+{% load filters %}
 {% block content %}
+  <div class="mt-5 mb-4 d-flex justify-content-center">
+    {% include 'render/store_logo.html' with style='height: 50px;' %}
+  </div>
   <h1 class="text-center">{{ receipt.storeName }}</h1>
   <p class="opacity-50 text-center">
     {{ receipt.storeAddress }} <br />
@@ -16,11 +19,11 @@
             <div class="opacity-50">{{ item.nameChinese }}</div>
           </td>
           <td class="py-3 align-bottom">
-            <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
             <div class="text-end font-monospace fw-thin fw-light text-nowrap">
               <span style="font-size: 12px;">Discount</span>
               {{ item.discount }} &euro;
             </div>
+            <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
           </td>
         </tr>
       {% empty %}
@@ -30,9 +33,19 @@
       {% endfor %}
     </tbody>
   </table>
-  <h1 class="text-end mt-5">
+  <p class="d-flex justify-content-between mt-5 fs-2 px-2">
     <span class="">Total Price &nbsp;</span>
     <span class="font-monospace">{{ receipt.totalPrice }} &euro;</span>
-  </h1>
-  <div style="height: 100px;"></div>
+  </p>
+  <div style="height: 150px;"></div>
+  <div class="fixed-bottom d-flex justify-content-center" style="height: 100px;gap: 10px;z-index: 700;">
+    <a href="{% url 'render:home' %}">
+      <button class="btn btn-primary btn-lg rounded-pill d-flex align-items-center" style="height: 60px;gap:5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>Return to Home
+      </button>
+    </a>
+  </div>
 {% endblock %}

@@ -1,0 +1,17 @@
+{% load filters %}
+
+{% if receipt.storeName|contains_any_ic:'k-market' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_kmarket.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'lidl' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_lidl.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'prisma' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_prisma.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'sale' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_sale.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'s-market' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_smarket.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'sokos' %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_sokos.svg" alt="" />
+{% else %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_default_store.svg" alt="" />
+{% endif %}
