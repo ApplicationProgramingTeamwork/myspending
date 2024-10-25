@@ -36,7 +36,8 @@ def upload_photo(request):
                         product_form.save()
                     else:
                         print(product_form.errors)
+                return HttpResponseRedirect(reverse('render:receipt_detail', args=[receipt.id]))
             else:
                 print(receipt_form.errors)
 
-    return HttpResponseRedirect(reverse('render:receipts'))
+    return HttpResponseRedirect(reverse('render:home'))

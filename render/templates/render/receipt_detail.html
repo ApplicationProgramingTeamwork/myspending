@@ -1,0 +1,38 @@
+{% extends 'render/base.html' %}
+
+{% block content %}
+  <h1 class="text-center">{{ receipt.storeName }}</h1>
+  <p class="opacity-50 text-center">
+    {{ receipt.storeAddress }} <br />
+    {{ receipt.date|date:'d.m.Y H:i' }}
+  </p>
+  <table class="table">
+    <tbody>
+      {% for item in products %}
+        <tr onclick="location.href='{% url 'render:receipt_detail' receipt.id %}'">
+          <td class="py-3">
+            <div class="fs-5">{{ item.name }}</div>
+            <div class="opacity-50">{{ item.nameEnglish }}</div>
+            <div class="opacity-50">{{ item.nameChinese }}</div>
+          </td>
+          <td class="py-3 align-bottom">
+            <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
+            <div class="text-end font-monospace fw-thin fw-light text-nowrap">
+              <span style="font-size: 12px;">Discount</span>
+              {{ item.discount }} &euro;
+            </div>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td>No products have been added yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h1 class="text-end mt-5">
+    <span class="">Total Price &nbsp;</span>
+    <span class="font-monospace">{{ receipt.totalPrice }} &euro;</span>
+  </h1>
+  <div style="height: 100px;"></div>
+{% endblock %}

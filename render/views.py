@@ -4,8 +4,12 @@ from django.contrib.auth.decorators import login_required
 from .forms import ReceiptForm, ProductForm
 
 
+@login_required
 def home(request):
-    return render(request, 'render/home.html')
+    receipts = Receipt.objects.filter(
+        owner=request.user).order_by('date_added')
+    context = {'receipts': receipts}
+    return render(request, 'render/home.html', context)
 
 
 @login_required
@@ -18,8 +22,9 @@ def receipt_list(request):
 
 @login_required
 def receipt_detail(request, receipt_id):
-    receipt = get_object_or_404(Receipt, id=receipt_id, owner=request.user)
-    context = {'receipt': receipt}
+    receipt = Receipt.objects.get(id=receipt_id, owner=request.user)
+    products = Product.objects.filter(receipt=receipt)
+    context = {'receipt': receipt, 'products': products}
     return render(request, 'render/receipt_detail.html', context)
 
 

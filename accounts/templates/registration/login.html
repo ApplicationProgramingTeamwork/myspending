@@ -1,16 +1,22 @@
 {% extends 'render/base.html' %}
 {% load django_bootstrap5 %}
 
-{% block page_header %}
-  <h1>Log In</h1>
-{% endblock %}
-
 {% block content %}
+  <h1 class="mt-5 text-center fw-lighter display-1">Log In or Sign Up</h1>
+
+  <h2 class="mt-3 mb-5 text-center">
+    <span class="fw-lighter">To track of</span>
+    <span class="teko fs-1">My Spending</span>
+    <span class="fw-lighter">immediately</span>
+  </h2>
+
   <form class="form-floating" action="{% url 'accounts:login' %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout='floating' %}
-    {% bootstrap_button button_type='submit' content='Log in' button_class='btn btn-primary btn-lg w-100 py-2' %}
+    {% bootstrap_button button_type='submit' content='Sign In' button_class='btn btn-primary btn-lg w-100 py-2' %}
   </form>
+
+  <a href="{% url 'accounts:register' %}"><button class="btn btn-outline-primary btn-lg w-100 mt-3">Sign Up</button></a>
 
   {% if form.errors %}
     <div class="alert alert-danger mt-3">Your username and password didn't match. Please try again.</div>
