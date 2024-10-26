@@ -18,7 +18,13 @@
             <div class="opacity-50">{{ item.nameEnglish }}</div>
             <div class="opacity-50">{{ item.nameChinese }}</div>
           </td>
-          <td class="py-3 align-bottom">
+          <td class="py-3 align-bottom position-relative">
+            <a class="position-absolute" style="top:20px;right:8px;color:#ccc;" href="{% url 'render:edit_product' item.id %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
+                <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                <path d="m15 5 4 4" />
+              </svg>
+            </a>
             {% if item.discount != 0 %}
               <div class="text-end font-monospace fw-thin fw-light text-nowrap" style="color: green;">
                 <span style="font-size: 12px;">Discount</span>
@@ -35,19 +41,25 @@
       {% endfor %}
     </tbody>
   </table>
-  <p class="d-flex justify-content-between mt-5 fs-2 px-2">
-    <span class="">Total Price &nbsp;</span>
-    <span class="font-monospace">{{ receipt.totalPrice }} &euro;</span>
-  </p>
   <div style="height: 150px;"></div>
-  <div class="fixed-bottom d-flex justify-content-center" style="height: 100px;gap: 10px;z-index: 700;">
-    <a style="text-decoration: none;" href="{% url 'render:home' %}">
-      <button class="btn bg-black text-white rounded-pill d-flex align-items-center" style="height: 50px;gap:5px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
-          <path d="m12 19-7-7 7-7" />
-          <path d="M19 12H5" />
-        </svg>Home&nbsp;&nbsp;&nbsp;
-      </button>
+  <div class="position-fixed d-flex justify-content-center" style="left: 20px; right: 20px;bottom: 40px; gap: 10px;z-index: 700;">
+    <a class="fs-5 bg-black text-danger rounded-pill d-flex align-items-center justify-content-center" style="height: 60px; width:60px;text-decoration: none;" href="{% url 'render:delete_receipt' receipt.id %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2">
+        <path d="M3 6h18" />
+        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        <line x1="10" x2="10" y1="11" y2="17" />
+        <line x1="14" x2="14" y1="11" y2="17" />
+      </svg>
+    </a>
+    <div class="bg-black text-white rounded-pill d-flex align-items-center" style="height: 60px; padding: 0 20px;">
+      <span class="font-monospace">Total <b class="fs-4">{{ receipt.totalPrice }}</b> &euro;</span>
+    </div>
+    <a class="fs-5 bg-black text-white rounded-pill d-flex align-items-center justify-content-center" style="height: 60px; width:60px;text-decoration: none;" href="{% url 'render:edit_receipt' receipt.id %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
+        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+        <path d="m15 5 4 4" />
+      </svg>
     </a>
   </div>
 {% endblock %}

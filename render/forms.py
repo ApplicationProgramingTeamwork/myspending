@@ -27,3 +27,6 @@ class ProductForm(forms.ModelForm):
             'price': 'Price',
             'discount': 'Discount'
         }
+        widgets = {
+            'receipt': forms.HiddenInput()
+        }

@@ -89,6 +89,13 @@ def edit_receipt(request, receipt_id):
 
 
 @login_required
+def delete_receipt(request, receipt_id):
+    receipt = get_object_or_404(Receipt, id=receipt_id, owner=request.user)
+    receipt.delete()
+    return redirect('render:home')
+
+
+@login_required
 def edit_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
