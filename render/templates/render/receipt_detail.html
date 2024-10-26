@@ -38,13 +38,14 @@
     <span class="font-monospace">{{ receipt.totalPrice }} &euro;</span>
   </p>
   <div style="height: 150px;"></div>
-  <div class="fixed-bottom d-flex justify-content-center" style="height: 100px;gap: 10px;z-index: 700;" onclick="history.go('{% url 'render:home' %}')">
-    <button class="btn bg-black text-white rounded-pill d-flex align-items-center" style="height: 50px; gap:5px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
-        <path d="m12 19-7-7 7-7" />
-        <path d="M19 12H5" />
-      </svg>
-      Home&nbsp;&nbsp;&nbsp;
-    </button>
+  <div class="fixed-bottom d-flex justify-content-center" style="height: 100px;gap: 10px;z-index: 700;">
+    <a style="text-decoration: none;" href="{% url 'render:home' %}">
+      <button class="btn bg-black text-white rounded-pill d-flex align-items-center" style="height: 50px;gap:5px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left">
+          <path d="m12 19-7-7 7-7" />
+          <path d="M19 12H5" />
+        </svg>Home&nbsp;&nbsp;&nbsp;
+      </button>
+    </a>
   </div>
 {% endblock %}
