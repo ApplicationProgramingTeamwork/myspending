@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('render.urls')),
     path('accounts/', include('accounts.urls')),
-    path('ai/', include('ai.urls')), 
+    path('ai/', include('ai.urls')),
+    path('', include('pwa.urls')),
 ]
-

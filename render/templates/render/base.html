@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
+  {% load pwa %}
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% progressive_web_app_meta %}
+    {% comment %} <meta rel="manifest" href="{% url 'pwa:manifest' %}" /> {% endcomment %}
+    <link rel="icon" href="/static/render/logo.png" type="image/png" />
     <title>My Spending</title>
     {% load django_bootstrap5 %}
     {% bootstrap_css %}
@@ -54,7 +58,7 @@
     </nav>
 
     <!-- Main content -->
-    <main class="container px-4">
+    <main class="container">
       <div>
         {% block content %}
 

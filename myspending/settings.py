@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ai',
     'accounts',
     'django_bootstrap5',
+    'pwa',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,3 +149,29 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 0  # No limit on file size
 LOGIN_REDIRECT_URL = 'render:home'
 LOGOUT_REDIRECT_URL = 'render:home'
 LOGIN_URL = 'accounts:login'
+
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'render', 'static'),
+]
+
+# PWA
+PWA_APP_NAME = "My Spending"
+PWA_APP_DESCRIPTION = "A web application designed to track supermarket expenses."
+PWA_APP_THEME_COLOR = "#000000"
+PWA_APP_BACKGROUND_COLOR = "#FFFFFF"
+PWA_APP_DISPLAY = "standalone"
+PWA_APP_SCOPE = "/"
+PWA_APP_START_URL = "/"
+PWA_APP_ICONS = [
+    {
+        'src': '/static/render/logo.png',
+        'sizes': '192x192',
+        'type': 'image/png',
+    },
+    {
+        'src': '/static/render/logo@2x.png',
+        'sizes': '512x512',
+        'type': 'image/png',
+    },
+]
