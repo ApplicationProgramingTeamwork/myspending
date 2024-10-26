@@ -1,6 +1,7 @@
 {% load filters %}
-
-{% if receipt.storeName|contains_any_ic:'k-' %}
+{% if not receipt.storeName %}
+  <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_default_store.svg" alt="" />
+{% elif receipt.storeName|contains_any_ic:'k-' %}
   <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_kmarket.svg" alt="" />
 {% elif receipt.storeName|contains_any_ic:'lidl' %}
   <img class="object-fit-contain rounded" style="{{ style }}" src="/static/render/logo_lidl.svg" alt="" />
