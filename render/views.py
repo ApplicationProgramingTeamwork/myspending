@@ -7,7 +7,7 @@ from .forms import ReceiptForm, ProductForm
 @login_required
 def home(request):
     receipts = Receipt.objects.filter(
-        owner=request.user).order_by('date_added')
+        owner=request.user).order_by('-date_added')
     context = {'receipts': receipts}
     return render(request, 'render/home.html', context)
 
