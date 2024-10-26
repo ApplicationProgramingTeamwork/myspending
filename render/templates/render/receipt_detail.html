@@ -2,7 +2,7 @@
 {% load filters %}
 {% block content %}
   <div class="mt-5 mb-4 d-flex justify-content-center">
-    {% include 'render/store_logo.html' with style='height: 50px;' %}
+    {% include 'render/store_logo.html' with style='height: 50px; max-width:80vw;' %}
   </div>
   <h1 class="text-center">{{ receipt.storeName }}</h1>
   <p class="opacity-50 text-center">
@@ -19,10 +19,12 @@
             <div class="opacity-50">{{ item.nameChinese }}</div>
           </td>
           <td class="py-3 align-bottom">
-            <div class="text-end font-monospace fw-thin fw-light text-nowrap">
-              <span style="font-size: 12px;">Discount</span>
-              {{ item.discount }} &euro;
-            </div>
+            {% if item.discount != 0 %}
+              <div class="text-end font-monospace fw-thin fw-light text-nowrap" style="color: green;">
+                <span style="font-size: 12px;">Discount</span>
+                {{ item.discount }} &euro;
+              </div>
+            {% endif %}
             <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
           </td>
         </tr>
