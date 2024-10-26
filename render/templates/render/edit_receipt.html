@@ -1,7 +1,7 @@
 {% extends 'render/base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  <form class="my-3" action="{% url 'render:edit_receipt' receipt.id %}" method="post">
+  <form action="{% url 'render:edit_receipt' receipt.id %}" method="post">
     {% csrf_token %}
     {% bootstrap_form form layout='floating' %}
     {% bootstrap_button button_type='submit' content='Save' button_class='btn btn-primary btn-lg w-100 py-2' %}
