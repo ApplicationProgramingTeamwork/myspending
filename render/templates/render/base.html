@@ -21,14 +21,14 @@
       .logo {
         font-family: 'Teko', sans-serif;
         font-size: 30px;
-        margin-top: -10px;
-        margin-bottom: -10px;
+        margin-top: -15px;
+        margin-bottom: -15px;
       }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="position-sticky top-0 navbar navbar-expand-md navbar-light mb-4 border" style="z-index: 3; background-color: #eeeeee8a; backdrop-filter: blur(10px)">
+    <nav class="position-fixed top-0 vw-100 navbar navbar-expand-md navbar-light mb-4 border-bottom overflow-hidden" style="height: 50px; z-index: 3; background-color: #ffffff80;backdrop-filter: blur(10px)">
       <div class="container-fluid">
         <div class="d-flex" style="width: 50px;min-width: 50px;"></div>
         <a class="navbar-brand logo" href="{% url 'render:home' %}">My Spending</a>
@@ -58,7 +58,7 @@
     </nav>
 
     <!-- Main content -->
-    <main class="container">
+    <main class="container" style="padding-top: 50px;">
       <div>
         {% block content %}
 

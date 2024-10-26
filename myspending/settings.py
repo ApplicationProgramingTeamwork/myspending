@@ -158,7 +158,7 @@ STATICFILES_DIRS = [
 # PWA
 PWA_APP_NAME = "My Spending"
 PWA_APP_DESCRIPTION = "A web application designed to track supermarket expenses."
-PWA_APP_THEME_COLOR = "#000000"
+PWA_APP_THEME_COLOR = "#FFFFFF"
 PWA_APP_BACKGROUND_COLOR = "#FFFFFF"
 PWA_APP_DISPLAY = "standalone"
 PWA_APP_SCOPE = "/"
