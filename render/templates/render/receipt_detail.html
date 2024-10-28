@@ -12,7 +12,7 @@
   <table class="table">
     <tbody>
       {% for item in products %}
-        <tr onclick="location.href='{% url 'render:receipt_detail' receipt.id %}'">
+        <tr>
           <td class="py-3">
             <div class="fs-5">{{ item.name }}</div>
             <div class="opacity-50">{{ item.nameEnglish }}</div>
@@ -41,6 +41,10 @@
       {% endfor %}
     </tbody>
   </table>
+  <!-- Add New Product Button -->
+  <div class="d-flex justify-content-center mt-3">
+    <a href="{% url 'render:new_product' receipt.id %}" class="btn btn-success">Add a new product</a>
+  </div>
   <div style="height: 100px;"></div>
   <div class="position-fixed d-flex justify-content-center" style="left: 20px; right: 20px;bottom: 40px; gap: 10px;z-index: 700;">
     <a class="fs-5 bg-black text-danger rounded-pill d-flex align-items-center justify-content-center" style="height: 60px; width:60px;text-decoration: none;" href="{% url 'render:delete_receipt' receipt.id %}">
