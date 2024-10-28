@@ -1,7 +1,14 @@
-# My Spending
+<div align="center">
+  <a href="https://myspending.onrender.com/">
+    <picture>
+      <img alt="logo" src="render/static/render/logo-192.png" height="192">
+    </picture>
+  </a>
+  <h1>My Spending</h1>
+</div>
 A web application designed to track supermarket expenses. It automatically captures shopping details by taking a photo of the receipt, helping you monitor your spending, analyze your purchasing habits, and offering additional features to efficiently manage your finances.
 
-## Install
+## Getting Started
 You need to run the following command when you first install this project
 ```shell
 pip install -r requirements.txt

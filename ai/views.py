@@ -19,7 +19,8 @@ def upload_photo(request):
 
     try:
         photo = form.cleaned_data['photo']
-        json_string = send_photo_to_gemini(photo.temporary_file_path())
+        file_path = photo.temporary_file_path()
+        json_string = send_photo_to_gemini(file_path)
         data = json.loads(json_string)
         receipt_form = ReceiptForm({
             'storeName': data.get('storeName'),
@@ -50,6 +51,10 @@ def upload_photo(request):
                 print(item)
                 print(product_form.errors)
             product_form.save()
+
+        upload = upload_file_to_blob_storage(file_path)
+
+        print(f"Uploaded file to Azure Blob Storage: {upload}")
 
         return HttpResponseRedirect(reverse('render:receipt_detail', args=[receipt.id]))
 

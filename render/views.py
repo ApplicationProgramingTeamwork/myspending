@@ -39,10 +39,10 @@ def new_receipt(request):
     if request.method == 'POST':
         form = ReceiptForm(data=request.POST)
         if form.is_valid():
-            new_receipt = form.save(commit=False)
-            new_receipt.owner = request.user
-            new_receipt.save()
-            return redirect('render:receipt_detail', receipt_id=new_receipt.id)
+            receipt = form.save(commit=False)
+            receipt.owner = request.user
+            receipt.save()
+            return redirect('render:receipt_detail', receipt_id=receipt.id)
     else:
         form = ReceiptForm()
 
@@ -51,20 +51,19 @@ def new_receipt(request):
 
 @login_required
 def new_product(request, receipt_id):
-    receipt = get_object_or_404(Receipt, id=receipt_id, owner=request.user)
+    receipt = Receipt.objects.get(id=receipt_id, owner=request.user)
     
     if request.method == 'POST':
         form = ProductForm(data=request.POST)
         if form.is_valid():
-            new_product = form.save(commit=False)
-            new_product.receipt = receipt
-            new_product.save()
+            form.save()
             return redirect('render:receipt_detail', receipt_id=receipt.id)
+        else:
+            print(form.errors)
     else:
-        form = ProductForm()
-    
-    context = {'form': form, 'receipt': receipt}
-    return render(request, 'render/new_product.html', context)
+        form = ProductForm(initial={'receipt': receipt})
+        context = {'form': form, 'receipt': receipt}
+        return render(request, 'render/new_product.html', context)
 
 @login_required
 def edit_receipt(request, receipt_id):

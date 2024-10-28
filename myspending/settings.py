@@ -165,12 +165,12 @@ PWA_APP_SCOPE = "/"
 PWA_APP_START_URL = "/"
 PWA_APP_ICONS = [
     {
-        'src': '/static/render/logo.png',
+        'src': '/static/render/logo-192.png',
         'sizes': '192x192',
         'type': 'image/png',
     },
     {
-        'src': '/static/render/logo@2x.png',
+        'src': '/static/render/logo-512.png',
         'sizes': '512x512',
         'type': 'image/png',
     },
