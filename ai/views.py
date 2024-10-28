@@ -52,10 +52,6 @@ def upload_photo(request):
                 print(product_form.errors)
             product_form.save()
 
-        upload = upload_file_to_blob_storage(file_path)
-
-        print(f"Uploaded file to Azure Blob Storage: {upload}")
-
         return HttpResponseRedirect(reverse('render:receipt_detail', args=[receipt.id]))
 
     except (KeyError, ValueError, json.JSONDecodeError) as e:

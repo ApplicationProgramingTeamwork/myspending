@@ -53,7 +53,7 @@
         </svg>
       </div>
       <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start bg-black rounded-5 mb-1 pt-3">
-        <li class="mb-3">
+        {% comment %} <li class="mb-3">
           <a class="dropdown-item text-white fs-5 d-flex align-items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text">
               <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
@@ -62,7 +62,7 @@
               <path d="M13 16H8" />
             </svg>Picture
           </a>
-        </li>
+        </li> {% endcomment %}
         <li class="mb-3">
           <a class="dropdown-item text-white fs-5 d-flex align-items-center gap-3" href="{% url 'render:edit_receipt' receipt.id %}">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
