@@ -24,13 +24,13 @@ def receipt_detail(request, receipt_id):
 
 @login_required
 def product_list(request):
-    products = Product.objects.order_by('date_added')
+    products = Product.objects.filter(receipt__owner=request.user).order_by('date_added')
     context = {'products': products}
     return render(request, 'render/product.html', context)
 
 @login_required
 def product_detail(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, id=product_id, receipt__owner=request.user)
     context = {'product': product}
     return render(request, 'render/product_detail.html', context)
 
@@ -39,10 +39,10 @@ def new_receipt(request):
     if request.method == 'POST':
         form = ReceiptForm(data=request.POST)
         if form.is_valid():
-            new_receipt_form = form.save(commit=False)
-            new_receipt_form.owner = request.user
-            new_receipt_form.save()
-            return redirect('render:receipts')
+            new_receipt = form.save(commit=False)
+            new_receipt.owner = request.user
+            new_receipt.save()
+            return redirect('render:receipt_detail', receipt_id=new_receipt.id)
     else:
         form = ReceiptForm()
 
@@ -87,7 +87,6 @@ def delete_receipt(request, receipt_id):
     receipt.delete()
     return redirect('render:home')
 
-
 @login_required
 def edit_product(request, product_id):
     product = get_object_or_404(Product, id=product_id, receipt__owner=request.user)
@@ -98,7 +97,14 @@ def edit_product(request, product_id):
         form = ProductForm(instance=product, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('render:product_detail', product_id=product.id)
+            return redirect('render:receipt_detail', receipt_id=product.receipt.id)
 
     context = {'form': form, 'product': product}
     return render(request, 'render/edit_product.html', context)
+
+@login_required
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id, receipt__owner=request.user)
+    receipt_id = product.receipt.id
+    product.delete()
+    return redirect('render:receipt_detail', receipt_id=receipt_id)
