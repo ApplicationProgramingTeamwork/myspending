@@ -43,7 +43,15 @@
   </table>
   <!-- Add New Product Button -->
   <div class="d-flex justify-content-center mt-3">
-    <a href="{% url 'render:new_product' receipt.id %}" class="btn btn-success">Add a new product</a>
+    <a href="{% url 'render:new_product' receipt.id %}" style="text-decoration: none;">
+      <button class="btn btn-outline-dark rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M8 12h8" />
+          <path d="M12 8v8" />
+        </svg>
+      </button>
+    </a>
   </div>
   <div style="height: 100px;"></div>
   <div class="position-fixed d-flex justify-content-center" style="left: 20px; right: 20px;bottom: 40px; gap: 10px;z-index: 700;">

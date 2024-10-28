@@ -10,9 +10,8 @@ urlpatterns = [
     path('receipts/<int:receipt_id>/', views.receipt_detail, name='receipt_detail'), 
     path('products/<int:product_id>/', views.product_detail, name='product_detail'),  
     path('new_receipt/', views.new_receipt, name='new_receipt'),
-    path('new_product/', views.new_product, name='new_product'),
-    path('edit_receipt/<int:receipt_id>/', views.edit_receipt,name='edit_receipt'),
-    path('delete_receipt/<int:receipt_id>/', views.delete_receipt,name='delete_receipt'),
-    path('edit_product/<int:product_id>/', views.edit_product,name='edit_product'),
+    path('new_product/<int:receipt_id>/', views.new_product, name='new_product'),
+    path('edit_receipt/<int:receipt_id>/', views.edit_receipt, name='edit_receipt'),
+    path('delete_receipt/<int:receipt_id>/', views.delete_receipt, name='delete_receipt'),
+    path('edit_product/<int:product_id>/', views.edit_product, name='edit_product'),
 ]
-
