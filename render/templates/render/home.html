@@ -1,35 +1,51 @@
 {% extends 'render/base.html' %}
 
 {% block content %}
-  <table class="table">
-    <tbody>
-      {% for receipt in receipts %}
-        <tr onclick="location.href='{% url 'render:receipt_detail' receipt.id %}'">
-          <td class="py-3 align-middle" style="width: 50px;">
-            {% include 'render/store_logo.html' with style='width:38px; height: 38px;' %}
-          </td>
-          <td class="py-3">
-            <div>{{ receipt.storeName }}</div>
-            <div class="opacity-50" style="font-size: 14px;">{{ receipt.date|date:'d.m.Y H:i' }}</div>
-          </td>
-          <td class="py-3 align-middle">
-            <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ receipt.totalPrice }} &euro;</div>
-          </td>
-          <td class="py-3 px-0 align-middle" style="width: 10px;">
-            <div class="opacity-25 text-end">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right">
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </div>
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td>No receipts have been added yet.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% if receipts|length == 0 %}
+    <div class="d-flex flex-column justify-content-center align-items-center gap-3" style="margin-top: calc(50vh - 200px); color: #ddd;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-receipt-text">
+        <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+        <path d="M14 8H8" />
+        <path d="M16 12H8" />
+        <path d="M13 16H8" />
+      </svg>
+      <div class="text-center">
+        <span class="fs-1">No receipts yet?</span><br />
+        <span class="fs-5" style="flex-flow: wrap;">
+          Press&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+            <circle cx="12" cy="13" r="3" />
+          </svg>&nbsp;to add your first receipt!
+        </span>
+      </div>
+    </div>
+  {% else %}
+    <table class="table">
+      <tbody>
+        {% for receipt in receipts %}
+          <tr onclick="location.href='{% url 'render:receipt_detail' receipt.id %}'">
+            <td class="py-3 align-middle" style="width: 50px;">
+              {% include 'render/store_logo.html' with style='width:38px; height: 38px;' %}
+            </td>
+            <td class="py-3">
+              <div>{{ receipt.storeName }}</div>
+              <div class="opacity-50" style="font-size: 14px;">{{ receipt.date|date:'d.m.Y H:i' }}</div>
+            </td>
+            <td class="py-3 align-middle">
+              <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ receipt.totalPrice }} &euro;</div>
+            </td>
+            <td class="py-3 px-0 align-middle" style="width: 10px;">
+              <div class="opacity-25 text-end">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
   <div style="height: 100px;"></div>
   {% include 'ai/upload_photo.html' %}
 {% endblock %}

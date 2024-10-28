@@ -9,39 +9,46 @@
     {{ receipt.storeAddress }} <br />
     {{ receipt.date|date:'d.m.Y H:i' }}
   </p>
-  <table class="table">
-    <tbody>
-      {% for item in products %}
-        <tr>
-          <td class="py-3">
-            <div>{{ item.name }}</div>
-            <div class="opacity-50 fw-light">{{ item.nameEnglish }}</div>
-            <div class="opacity-50 fw-light">{{ item.nameChinese }}</div>
-          </td>
-          <td class="py-3 align-bottom position-relative">
-            <a class="position-absolute" style="top:20px;right:8px;color:#ccc;" href="{% url 'render:edit_product' item.id %}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
-                <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                <path d="m15 5 4 4" />
-              </svg>
-            </a>
-            <div style="height: 50px;"></div>
-            {% if item.discount != 0 %}
-              <div class="text-end font-monospace fw-thin fw-light text-nowrap" style="color: green;">
-                <span style="font-size: 12px;">Discount</span>
-                {{ item.discount }} &euro;
-              </div>
-            {% endif %}
-            <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
-          </td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td>No products have been added yet.</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  {% if products|length == 0 %}
+    <div class="d-flex flex-column justify-content-center align-items-center gap-3" style="margin-top: 150px; color: #ddd;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart">
+        <circle cx="8" cy="21" r="1" />
+        <circle cx="19" cy="21" r="1" />
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+      </svg>
+      <div>No products yet</div>
+    </div>
+  {% else %}
+    <table class="table">
+      <tbody>
+        {% for item in products %}
+          <tr>
+            <td class="py-3">
+              <div>{{ item.name }}</div>
+              <div class="opacity-50 fw-light">{{ item.nameEnglish }}</div>
+              <div class="opacity-50 fw-light">{{ item.nameChinese }}</div>
+            </td>
+            <td class="py-3 align-bottom position-relative">
+              <a class="position-absolute" style="top:20px;right:8px;color:#ccc;" href="{% url 'render:edit_product' item.id %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil">
+                  <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                  <path d="m15 5 4 4" />
+                </svg>
+              </a>
+              <div style="height: 50px;"></div>
+              {% if item.discount != 0 %}
+                <div class="text-end font-monospace fw-thin fw-light text-nowrap" style="color: green;">
+                  <span style="font-size: 12px;">Discount</span>
+                  {{ item.discount }} &euro;
+                </div>
+              {% endif %}
+              <div class="text-end font-monospace fw-thin fw-light text-nowrap">{{ item.price }} &euro;</div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
   <div style="height: 100px;"></div>
   <div class="position-fixed d-flex justify-content-center" style="left: 20px; right: 20px;bottom: 40px; gap: 10px;z-index: 700;">
     <div class="dropup">
