@@ -1,5 +1,6 @@
 {% extends 'render/base.html' %}
 {% load filters %}
+{% load i18n %}
 {% block content %}
   {% if receipt.picture %}
     <!-- Modal of Picture -->
@@ -41,8 +42,11 @@
           <tr>
             <td class="py-3">
               <div>{{ item.name }}</div>
-              <div class="opacity-50 fw-light">{{ item.nameEnglish }}</div>
-              <div class="opacity-50 fw-light">{{ item.nameChinese }}</div>
+              {% if LANGUAGE_CODE == 'zh-hans' %}
+                <div class="opacity-50 fw-light">{{ item.nameChinese }}</div>
+              {% else %}
+                <div class="opacity-50 fw-light">{{ item.nameEnglish }}</div>
+              {% endif %}
             </td>
             <td class="py-3 align-bottom position-relative">
               <a class="position-absolute" style="top:20px;right:8px;color:#ccc;" href="{% url 'render:edit_product' item.id %}">

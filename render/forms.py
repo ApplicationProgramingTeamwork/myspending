@@ -28,5 +28,7 @@ class ProductForm(forms.ModelForm):
             'discount': 'Discount'
         }
         widgets = {
-            'receipt': forms.HiddenInput()
+            'receipt': forms.HiddenInput(),
+            'nameEnglish': forms.HiddenInput(),
+            'nameChinese': forms.HiddenInput(),
         }

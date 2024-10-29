@@ -5,6 +5,7 @@ app_name = 'render'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('set_language/', views.set_language, name='set_language'),
     path('products/', views.product_list, name='products'),  
     path('products/<int:product_id>/', views.product_detail, name='product_detail'),  
     path('products/<int:product_id>/edit_product/', views.edit_product, name='edit_product'),

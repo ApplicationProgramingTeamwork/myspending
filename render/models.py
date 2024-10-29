@@ -8,7 +8,7 @@ from PIL import Image
 class Receipt(models.Model):
     storeName = models.CharField(max_length=200, null=True, blank=True)
     storeAddress = models.CharField(max_length=200, null=True, blank=True)
-    totalPrice = models.DecimalField(max_digits=10, decimal_places=2)
+    totalPrice = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     date = models.DateTimeField(null=True,  blank=True, default=timezone.now)
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

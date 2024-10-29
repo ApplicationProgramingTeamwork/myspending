@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   {% load pwa %}
@@ -32,7 +33,27 @@
     <nav class="position-fixed top-0 vw-100 navbar navbar-expand-md navbar-light mb-4 border-bottom" style="height: 50px; z-index: 3; background-color: #ffffff;">
       <div class="container-fluid">
         {% if request.path == '/' or request.path|slice:':9' == '/accounts' %}
-          <div class="d-flex" style="width: 50px;min-width: 50px;"></div>
+          <div class="d-flex" style="width: 50px;min-width: 50px;">
+            {% if LANGUAGE_CODE == 'zh-hans' %}
+              <a class="link-dark link-underline-opacity-0" href="{% url 'render:set_language' %}?language=en">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-earth">
+                  <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54" />
+                  <path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17" />
+                  <path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+              </a>
+            {% else %}
+              <a class="link-dark link-underline-opacity-0" href="{% url 'render:set_language' %}?language=zh-hans">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-earth">
+                  <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54" />
+                  <path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17" />
+                  <path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+              </a>
+            {% endif %}
+          </div>
         {% else %}
           <div class="d-flex" style="width: 50px;min-width: 50px;" onclick="history.back()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left">

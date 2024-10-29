@@ -1,7 +1,10 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Receipt, Product
 from django.contrib.auth.decorators import login_required
 from .forms import ReceiptForm, ProductForm
+from django.conf import settings
+from django.utils import translation
 
 @login_required
 def home(request):
@@ -107,3 +110,11 @@ def delete_product(request, product_id):
     receipt_id = product.receipt.id
     product.delete()
     return redirect('render:receipt_detail', receipt_id=receipt_id)
+
+
+def set_language(request):
+    user_language = request.GET.get('language', 'en')
+    translation.activate(user_language)
+    response = HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    response.set_cookie(settings.LANGUAGE_COOKIE_NAME, user_language)
+    return response
