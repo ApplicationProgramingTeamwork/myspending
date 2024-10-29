@@ -19,8 +19,7 @@ def upload_photo(request):
 
     try:
         photo = form.cleaned_data['photo']
-        file_path = photo.temporary_file_path()
-        json_string = send_photo_to_gemini(file_path)
+        json_string = send_photo_to_gemini(photo.temporary_file_path())
         data = json.loads(json_string)
         receipt_form = ReceiptForm({
             'storeName': data.get('storeName'),
@@ -35,6 +34,7 @@ def upload_photo(request):
 
         receipt = receipt_form.save(commit=False)
         receipt.owner = request.user
+        receipt.set_picture(photo)
         receipt.save()
 
         for item in data['items']:
