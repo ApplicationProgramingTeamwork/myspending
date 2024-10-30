@@ -8,8 +8,9 @@ from django.utils import translation
 
 @login_required
 def home(request):
+    error = request.GET.get('error')
     receipts = Receipt.objects.filter(owner=request.user).order_by('-date_added')
-    context = {'receipts': receipts}
+    context = {'receipts': receipts, 'error': error}
     return render(request, 'render/home.html', context)
 
 @login_required

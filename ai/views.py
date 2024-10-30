@@ -54,5 +54,7 @@ def upload_photo(request):
 
         return HttpResponseRedirect(reverse('render:receipt_detail', args=[receipt.id]))
 
-    except (KeyError, ValueError, json.JSONDecodeError) as e:
+    except Exception as e:
         print(f"An error occurred: {e}")
+        print(f"JSON string: {json_string}")
+        return HttpResponseRedirect(f'{reverse("render:home")}?error=Oops! The receipt recognition failed. Please check the quality of the image and re-upload.')
